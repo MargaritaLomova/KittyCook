@@ -1,9 +1,12 @@
+using UnityEngine;
+
 namespace KittyCook.Data
 {
-    public class ProductInfo
+    [CreateAssetMenu(fileName = "NewProduct", menuName = "Kitty Cook/Create new product")]
+    public class ProductInfo : ScriptableObject
     {
-        public string RUName { get; set; }
-        public string ENName { get; set; }
-        public string SpritePath { get; set; }
+        public string RUName;
+        public string ENName;
+        public Sprite Sprite;
     }
 }

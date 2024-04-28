@@ -1,7 +1,18 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace KittyCook.Data
 {
+    [CreateAssetMenu(fileName = "NewRecipe", menuName = "Kitty Cook/Create new recipe")]
+    public class RecipeInfo : ScriptableObject
+    {
+        public string RUName;
+        public string ENName;
+        public Sprite Sprite;
+        public List<ProductInfo> ProductsForCook = new List<ProductInfo>();
+        public CookingMethod CookingMethod;
+    }
+
     public enum CookingMethod
     {
         Nothing,
@@ -12,16 +23,7 @@ namespace KittyCook.Data
 
     public class RecipeProductInfo
     {
-        public ProductInfo Product { get; set;}
-        public int Count { get; set;}
-    }
-
-    public class RecipeInfo
-    {
-        public string RUDishName { get; set; }
-        public string ENDishName { get; set; }
-        public string DishSpritePath { get; set; }
-        public List<ProductInfo> ProductsForCook { get; set; }
-        public CookingMethod CookingMethod { get; set; }
+        public ProductInfo Product { get; set; }
+        public int Count { get; set; }
     }
 }
