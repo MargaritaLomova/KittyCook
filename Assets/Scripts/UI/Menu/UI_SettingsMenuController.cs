@@ -19,7 +19,7 @@ public class UI_SettingsMenuController : MonoBehaviour
     [SerializeField]
     private AudioMixer audioMixer;
 
-    private void Start()
+    protected virtual void Start()
     {
         gameObject.SetActive(false);
 
@@ -34,13 +34,13 @@ public class UI_SettingsMenuController : MonoBehaviour
         soundsSlider.value = PlayerPrefs.GetFloat("Sounds");
     }
 
-    public void SetVolumeBySliderValue(float sliderValue, string paramName)
+    private void SetVolumeBySliderValue(float sliderValue, string paramName)
     {
         audioMixer.SetFloat(paramName, sliderValue);
         PlayerPrefs.SetFloat(paramName, sliderValue);
     }
 
-    public void OnCloseButtonClicked()
+    private void OnCloseButtonClicked()
     {
         gameObject.SetActive(false);
     }

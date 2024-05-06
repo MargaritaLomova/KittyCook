@@ -24,17 +24,17 @@ public class UI_MenuController : MonoBehaviour
         exitButton.onClick.AddListener(OnExitButtonClicked);
     }
 
-    public void OnStartButtonClicked()
+    private void OnStartButtonClicked()
     {
-        SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Single);
     }
 
-    public void OnSettingsButtonClicked()
+    private void OnSettingsButtonClicked()
     {
         settings.gameObject.SetActive(true);
     }
 
-    public void OnExitButtonClicked()
+    private void OnExitButtonClicked()
     {
         Application.Quit();
     }
