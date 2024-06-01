@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerPositionController : MonoBehaviour
 {
     [SerializeField]
     private PositionType type;
+    [SerializeField]
+    private UnityEvent afterReplaceEvent;
 
     private Button button;
     private PlayerController player;
@@ -23,7 +26,7 @@ public class PlayerPositionController : MonoBehaviour
 
         player.Flip(type == PositionType.Cook);
 
-        Debug.Log("Replace");
+        afterReplaceEvent?.Invoke();
     }
 }
 
@@ -31,5 +34,6 @@ public enum PositionType
 {
     Knight = 0,
     Cook = 1,
-    Client = 2
+    Client = 2,
+    ChooseProducts = 3
 }

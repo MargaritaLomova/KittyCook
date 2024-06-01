@@ -1,5 +1,4 @@
 using KittyCook.Data;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +12,9 @@ namespace KittyCook.Tech
         [SerializeField]
         private List<RecipeInfo> recipes = new List<RecipeInfo>();
 
+        public List<ProductInfo> Products => products;
+        public List<RecipeInfo> Recipes => recipes;
+
         private static DataConfig mInstance;
         public static DataConfig Get
         {
@@ -20,7 +22,7 @@ namespace KittyCook.Tech
             {
                 if (mInstance == null)
                 {
-                    mInstance = Resources.Load("DataConfig") as DataConfig;
+                    mInstance = Resources.Load("Configs/DataConfig") as DataConfig;
                 }
 
                 return mInstance;

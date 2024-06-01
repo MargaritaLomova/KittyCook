@@ -76,4 +76,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a5195926e5e3274d8bff14ff3d5ca78, type: 2}
   - {fileID: 11400000, guid: 4a682fa8cb4c1ab46a215e18b6a6c7e4, type: 2}
   - {fileID: 11400000, guid: 08c340248ff2298438bcd23683fa4649, type: 2}
-  recipes: []
+  recipes:
+  - {fileID: 11400000, guid: ebdc249f29a84494ca1c33fc077f6a13, type: 2}
+  - {fileID: 11400000, guid: f205c5ebb4a1f0a409c576367b2c7e39, type: 2}
+  - {fileID: 11400000, guid: d492dbacfea1815428b790836fd052dd, type: 2}
+  - {fileID: 11400000, guid: 95b0e08b829c0bf42bc764f9392ffe44, type: 2}
+  - {fileID: 11400000, guid: 3f060d8e98d17a24ba898467d75e41b8, type: 2}
+  - {fileID: 11400000, guid: 2720c81922f39f8449bd7b06b6ae3f08, type: 2}
