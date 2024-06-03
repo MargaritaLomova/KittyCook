@@ -12,11 +12,19 @@ public class UI_ChooseProductsMenuController : MonoBehaviour
     [SerializeField]
     private Button closeButton;
     [SerializeField]
+    private Button acceptButton;
+    [SerializeField]
     private List<UI_FridgeProductController> products = new List<UI_FridgeProductController>();
+
+    private List<ProductInfo> currentList = new List<ProductInfo>();
+    private PlayerController player;
 
     private void Start()
     {
+        player = FindObjectOfType<PlayerController>();
+
         closeButton.onClick.AddListener(Hide);
+        acceptButton.onClick.AddListener(OnAcceptButtonClicked);
 
         GameController.Get.OnNewOrderCreate += SetProducts;
 
@@ -26,23 +34,37 @@ public class UI_ChooseProductsMenuController : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
+
+        foreach(var productIcon in products)
+        {
+            productIcon.ToggleSelection = player.PlayerInventory.Contains(productIcon.CurrentInfo);
+        }
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
+
+        currentList.Clear();
     }
 
-    private void SetProducts()
+    public void OnAcceptButtonClicked()
     {
-        if (GameController.Get != null && GameController.Get.CurrentOrder != null)
-            SetProducts(GameController.Get.CurrentOrder.ProductsForCook);
+        foreach(var product in products)
+        {
+            if (product.ToggleSelection)
+                currentList.Add(product.CurrentInfo);
+        }
+
+        player.PlayerInventory = currentList;
+
+        Hide();
     }
 
-    private void SetProducts(List<ProductInfo> productsToCook)
+    private void SetProducts(RecipeInfo order)
     {
         List<ProductInfo> productsToShow = new List<ProductInfo>();
-        productsToShow.AddRange(productsToCook);
+        productsToShow.AddRange(order.ProductsForCook);
 
         if (productsToShow.Count < products.Count)
         {

@@ -15,6 +15,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private CookedDishController cookedDishController;
 
+    public List<ProductInfo> PlayerInventory
+    {
+        get
+        {
+            return playerInventory;
+        }
+        set
+        {
+            playerInventory.Clear();
+            playerInventory.AddRange(value);
+        }
+    }
+
     private StoveController stove;
     private List<ProductInfo> playerInventory = new List<ProductInfo>();
     private RecipeInfo cookedDish;
@@ -23,16 +36,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         stove = FindObjectOfType<StoveController>();
-    }
-
-    public void AddProductToInventory(ProductInfo product)
-    {
-        playerInventory.Add(product);
-    }
-
-    public void RemoveProductToInventory(ProductInfo product)
-    {
-        playerInventory.Remove(product);
     }
 
     public void GetCookedDish(CookingMethod cookingMethod)
@@ -46,9 +49,14 @@ public class PlayerController : MonoBehaviour
             for(int i = 0; i < order.ProductsForCook.Count; i++)
             {
                 if (!order.ProductsForCook.Contains(playerInventory[i]))
+                {
                     break;
+                }
+
                 if (i == order.ProductsForCook.Count - 1)
+                {
                     isListsEqual = true;
+                }
             }
         }
 
@@ -82,6 +90,8 @@ public class PlayerController : MonoBehaviour
             cookedDishController.SetAndStartGiveDishAnimation(cookedDish, () =>
             {
                 GameController.Get.ClientGetCookedDish(cookedDish);
+
+                playerInventory.Clear();
                 cookedDish = null;
             });
         }

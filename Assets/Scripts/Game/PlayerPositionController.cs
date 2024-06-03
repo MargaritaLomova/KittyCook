@@ -8,6 +8,8 @@ public class PlayerPositionController : MonoBehaviour
     private PositionType type;
     [SerializeField]
     private UnityEvent afterReplaceEvent;
+    [SerializeField]
+    private Transform playerPosition;
 
     private Button button;
     private PlayerController player;
@@ -22,7 +24,7 @@ public class PlayerPositionController : MonoBehaviour
 
     private void ReplacePlayerToCurrentPosition()
     {
-        player.transform.position = transform.position;
+        player.transform.position = playerPosition.position;
 
         player.Flip(type == PositionType.Cook);
 

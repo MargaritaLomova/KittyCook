@@ -3,21 +3,21 @@ using KittyCook.Tech;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GuestController : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField]
-    private GameObject bubble;
+    private CanvasGroup bubble;
     [SerializeField]
     private TMP_Text orderText;
 
     public RecipeInfo Order { get; private set; }
 
-
     private void Start()
     {
-        bubble.SetActive(false);
+        bubble.alpha = 0;
 
         GenerateOrder();
 
@@ -44,26 +44,32 @@ public class GuestController : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.5f);
 
-        orderText.text = $"I want to order \n {Order.ENName}!";
-        bubble.SetActive(true);
-
-        yield return new WaitForSecondsRealtime(2f);
-
-        bubble.SetActive(false);
+        yield return StartCoroutine(ShowAndHideBubbleWithText($"I want to order \n {Order.ENName}!", 2f));
     }
 
     private IEnumerator ShowReactionAndGoAway(string reactionText)
     {
         yield return new WaitForSecondsRealtime(0.5f);
 
-        orderText.text = reactionText;
-        bubble.SetActive(true);
-
-        yield return new WaitForSecondsRealtime(1f);
-
-        bubble.SetActive(false);
+        yield return StartCoroutine(ShowAndHideBubbleWithText(reactionText, 2f));
 
         if (gameObject)
             Destroy(gameObject);
+    }
+
+    private IEnumerator ShowAndHideBubbleWithText(string text, float bubbleLifetime)
+    {
+        orderText.text = text;
+
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(bubble.GetComponent<RectTransform>());
+
+        yield return new WaitForSeconds(Time.fixedDeltaTime);
+
+        bubble.alpha = 1;
+
+        yield return new WaitForSeconds(bubbleLifetime);
+
+        bubble.alpha = 0;
     }
 }

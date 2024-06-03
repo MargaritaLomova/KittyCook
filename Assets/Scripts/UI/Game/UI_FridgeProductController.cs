@@ -10,28 +10,23 @@ public class UI_FridgeProductController : MonoBehaviour
     [SerializeField]
     private Toggle selectedToggle;
 
-    private PlayerController player;
-    private ProductInfo currentInfo;
-
-    private void Start()
+    public ProductInfo CurrentInfo { get; private set; }
+    public bool ToggleSelection 
     {
-        player = FindObjectOfType<PlayerController>();
-
-        selectedToggle.onValueChanged.AddListener(OnToggleChanged);
+        get
+        {
+            return selectedToggle.isOn;
+        }
+        set
+        {
+            selectedToggle.isOn = value;
+        }
     }
 
     public void Init(ProductInfo info)
     {
-        currentInfo = info;
+        CurrentInfo = info;
 
-        icon.sprite = currentInfo.Sprite;
-
-        selectedToggle.isOn = false;
-    }
-
-    public void OnToggleChanged(bool value)
-    {
-        if (value) player.AddProductToInventory(currentInfo);
-        else player.RemoveProductToInventory(currentInfo);
+        icon.sprite = CurrentInfo.Sprite;
     }
 }

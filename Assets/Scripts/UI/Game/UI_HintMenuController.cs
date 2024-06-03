@@ -18,27 +18,39 @@ public class UI_HintMenuController : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        Hide();
 
         closeButton.onClick.AddListener(OnCloseButtonClicked);
+
+        GameController.Get.OnNewOrderCreate += Set;
     }
 
-    public void Set(RecipeInfo recipeInfo)
+    public void Show()
     {
-        targetIcon.Set(recipeInfo.Sprite);
+        gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void Set(RecipeInfo order)
+    {
+        targetIcon.Set(order.Sprite);
         //cookingMethodIcon.Set(recipeInfo.CookingMethod);
 
         foreach (var icon in productsIcons)
             icon.gameObject.SetActive(false);
-        for(int i = 0; i < recipeInfo.ProductsForCook.Count; i++)
+        for(int i = 0; i < order.ProductsForCook.Count; i++)
         {
-            productsIcons[i].Set(recipeInfo.ProductsForCook[i].Sprite);
+            productsIcons[i].Set(order.ProductsForCook[i].Sprite);
             productsIcons[i].gameObject.SetActive(true);
         }
     }
 
     private void OnCloseButtonClicked()
     {
-        gameObject.SetActive(false);
+        Hide();
     }
 }

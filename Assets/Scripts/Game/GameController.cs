@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
     private List<GuestController> guestsPrefabs = new List<GuestController>();
 
     public static GameController Get { get; private set; }
-    public event UnityAction OnNewOrderCreate;
+    public event UnityAction<RecipeInfo> OnNewOrderCreate;
     public GuestController CurrentGuest { get; private set; }
     public RecipeInfo CurrentOrder => CurrentGuest.Order;
 
@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
 
             yield return new WaitForSeconds(Time.fixedDeltaTime);
 
-            OnNewOrderCreate?.Invoke();
+            OnNewOrderCreate?.Invoke(CurrentOrder);
 
             float timer = 0f;
             while (timer < guestLifetime && CurrentGuest && CurrentGuest.gameObject)

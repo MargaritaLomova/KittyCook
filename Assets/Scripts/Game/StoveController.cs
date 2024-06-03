@@ -54,7 +54,7 @@ public class StoveController : MonoBehaviour
     public void StartToBoil()
     {
         pot.SetActive(true);
-        StartCoroutine(Cooking("Up_and_down_on", fryTime, () =>
+        StartCoroutine(Cooking("Up_on", boilTime, () =>
         {
             pot.SetActive(false);
             player.GetCookedDish(KittyCook.Data.CookingMethod.Boiling);
@@ -63,7 +63,7 @@ public class StoveController : MonoBehaviour
 
     public void StartToBake()
     {
-        StartCoroutine(Cooking("Down_on", fryTime, () =>
+        StartCoroutine(Cooking("Down_on", bakeTime, () =>
         {
             player.GetCookedDish(KittyCook.Data.CookingMethod.Baking);
         }));

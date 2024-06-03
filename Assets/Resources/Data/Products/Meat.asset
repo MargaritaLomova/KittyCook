@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RUName: "\u041C\u044F\u0441\u043E"
   ENName: Meat
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 9ba53411f37a3914f8ad8e615fd36ad5, type: 3}
