@@ -3,6 +3,7 @@ using KittyCook.Tech;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GuestController : MonoBehaviour
@@ -12,6 +13,8 @@ public class GuestController : MonoBehaviour
     private CanvasGroup bubble;
     [SerializeField]
     private TMP_Text orderText;
+    [SerializeField]
+    private Animator animator;
 
     public RecipeInfo Order { get; private set; }
 
@@ -26,12 +29,26 @@ public class GuestController : MonoBehaviour
 
     public void ShowPositiveReaction()
     {
-        StartCoroutine(ShowReactionAndGoAway($"Oh! Thats great, thank you! Bye!"));
+        animator.SetBool("Idle", false);
+        animator.SetBool("Happy", true);
+
+        StartCoroutine(ShowReactionAndGoAway($"Oh! Thats great, thank you! Bye!", () =>
+        {
+            animator.SetBool("Happy", false);
+            animator.SetBool("Idle", true);
+        }));
     }
 
     public void ShowNegativeReaction()
     {
-        StartCoroutine(ShowReactionAndGoAway($"Oh... Thats not that i wanted..."));
+        animator.SetBool("Idle", false);
+        animator.SetBool("Sad", true);
+
+        StartCoroutine(ShowReactionAndGoAway($"Oh... Thats not that i wanted...", () =>
+        {
+            animator.SetBool("Sad", false);
+            animator.SetBool("Idle", true);
+        }));
     }
 
     private void GenerateOrder()
@@ -42,16 +59,23 @@ public class GuestController : MonoBehaviour
 
     private IEnumerator ShowAndHideOrder()
     {
+        animator.SetBool("Happy", true);
+
         yield return new WaitForSecondsRealtime(0.5f);
+
+        animator.SetBool("Happy", false);
+        animator.SetBool("Idle", true);
 
         yield return StartCoroutine(ShowAndHideBubbleWithText($"I want to order \n {Order.ENName}!", 2f));
     }
 
-    private IEnumerator ShowReactionAndGoAway(string reactionText)
+    private IEnumerator ShowReactionAndGoAway(string reactionText, UnityAction callback = null)
     {
         yield return new WaitForSecondsRealtime(0.5f);
 
         yield return StartCoroutine(ShowAndHideBubbleWithText(reactionText, 2f));
+
+        callback?.Invoke();
 
         if (gameObject)
             Destroy(gameObject);
