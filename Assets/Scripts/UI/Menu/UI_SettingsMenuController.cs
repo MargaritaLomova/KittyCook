@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class UI_SettingsMenuController : MonoBehaviour
+public class UI_SettingsMenuController : UI_PanelController
 {
     [Header("Components")]
     [SerializeField]
@@ -42,6 +42,6 @@ public class UI_SettingsMenuController : MonoBehaviour
 
     private void OnCloseButtonClicked()
     {
-        gameObject.SetActive(false);
+        Hide();
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_StoveController : MonoBehaviour
+public class UI_StoveController : UI_PanelController
 {
     [Header("Components")]
     [SerializeField]
@@ -21,16 +21,6 @@ public class UI_StoveController : MonoBehaviour
         boilButton.onClick.AddListener(OnBoilClicked);
         bakeButton.onClick.AddListener(OnBakeClicked);
 
-        Hide();
-    }
-
-    public void Show()
-    {
-        gameObject.SetActive(true);
-    }
-
-    public void Hide()
-    {
         gameObject.SetActive(false);
     }
 

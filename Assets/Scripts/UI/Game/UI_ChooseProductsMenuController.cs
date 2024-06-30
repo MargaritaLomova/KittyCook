@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_ChooseProductsMenuController : MonoBehaviour
+public class UI_ChooseProductsMenuController : UI_PanelController
 {
     [Header("Components")]
     [SerializeField]
@@ -28,12 +28,12 @@ public class UI_ChooseProductsMenuController : MonoBehaviour
 
         GameController.Get.OnNewOrderCreate += SetProducts;
 
-        Hide();
+        gameObject.SetActive(false);
     }
 
-    public void Show()
+    public override void Show()
     {
-        gameObject.SetActive(true);
+        base.Show();
 
         foreach(var productIcon in products)
         {
@@ -41,9 +41,9 @@ public class UI_ChooseProductsMenuController : MonoBehaviour
         }
     }
 
-    public void Hide()
+    public override void Hide()
     {
-        gameObject.SetActive(false);
+        base.Hide();
 
         currentList.Clear();
     }

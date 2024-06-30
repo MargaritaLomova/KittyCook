@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_HintMenuController : MonoBehaviour
+public class UI_HintMenuController : UI_PanelController
 {
     [Header("Components")]
     [SerializeField]
@@ -21,21 +21,11 @@ public class UI_HintMenuController : MonoBehaviour
 
     private void Start()
     {
-        Hide();
+        gameObject.SetActive(false);
 
         closeButton.onClick.AddListener(OnCloseButtonClicked);
 
         GameController.Get.OnNewOrderCreate += Set;
-    }
-
-    public void Show()
-    {
-        gameObject.SetActive(true);
-    }
-
-    public void Hide()
-    {
-        gameObject.SetActive(false);
     }
 
     private void Set(RecipeInfo order)
