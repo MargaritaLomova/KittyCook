@@ -1,11 +1,14 @@
 using KittyCook.Data;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_HintMenuController : MonoBehaviour
 {
     [Header("Components")]
+    [SerializeField]
+    private TMP_Text title;
     [SerializeField]
     private UI_HintIconController targetIcon;
     [SerializeField]
@@ -37,6 +40,8 @@ public class UI_HintMenuController : MonoBehaviour
 
     private void Set(RecipeInfo order)
     {
+        title.text = order.ENName;
+
         targetIcon.Set(order.Sprite);
         //cookingMethodIcon.Set(recipeInfo.CookingMethod);
 
