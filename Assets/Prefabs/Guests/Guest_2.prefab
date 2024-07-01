@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 490175319073538655}
   - component: {fileID: 1015956767198925277}
   m_Layer: 5
-  m_Name: Guest
+  m_Name: Guest_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -237, y: -57}
+  m_AnchoredPosition: {x: -207, y: -73}
   m_SizeDelta: {x: 347, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5281118795111290288
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1057102201, guid: 0a74850aab118b74bb48164d5c64bd1b, type: 3}
+  m_Sprite: {fileID: 816492673, guid: 7fbe4cfc74d6d544dbaf918af66c38bf, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -118,7 +118,7 @@ Animator:
   m_GameObject: {fileID: 4692491233793700451}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: da8f0e39063472a4cb3860f6ab2129e1, type: 2}
+  m_Controller: {fileID: 22100000, guid: a25119b0095c4344fbbff151e1219841, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
