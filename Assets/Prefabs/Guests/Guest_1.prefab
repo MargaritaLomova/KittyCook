@@ -108,6 +108,7 @@ MonoBehaviour:
   bubble: {fileID: 7418634824470903999}
   orderText: {fileID: 8659243415727053097}
   animator: {fileID: 1015956767198925277}
+  rewardMoneyCount: 10
 --- !u!95 &1015956767198925277
 Animator:
   serializedVersion: 5

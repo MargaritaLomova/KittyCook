@@ -16,6 +16,11 @@ public class GuestController : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    [Space]
+    [Header("Components")]
+    [SerializeField]
+    private int rewardMoneyCount = 5;
+
     public RecipeInfo Order { get; private set; }
 
     private void Start()
@@ -29,6 +34,8 @@ public class GuestController : MonoBehaviour
 
     public void ShowPositiveReaction()
     {
+        UI_GameStaticController.Get.AddMoney(rewardMoneyCount);
+
         animator.SetBool("Idle", false);
         animator.SetBool("Happy", true);
 
