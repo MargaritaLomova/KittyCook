@@ -5,6 +5,8 @@ public class UI_StoveController : UI_PanelController
 {
     [Header("Components")]
     [SerializeField]
+    private Button closeButton;
+    [SerializeField]
     private Button fryButton;
     [SerializeField]
     private Button boilButton;
@@ -20,6 +22,8 @@ public class UI_StoveController : UI_PanelController
         fryButton.onClick.AddListener(OnFryClicked);
         boilButton.onClick.AddListener(OnBoilClicked);
         bakeButton.onClick.AddListener(OnBakeClicked);
+
+        closeButton.onClick.AddListener(Hide);
 
         gameObject.SetActive(false);
     }
