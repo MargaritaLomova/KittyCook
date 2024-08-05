@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,11 +11,7 @@ public class UI_LevelsMenuController : MonoBehaviour, IDragHandler, IEndDragHand
     [SerializeField]
     private ScrollRect levelsView;
     [SerializeField]
-    private RectTransform[] levelsHolders;
-    [SerializeField]
     private RectTransform dotsHolder;
-    [SerializeField]
-    private Image[] dots;
     [SerializeField]
     private Button returnButton;
 
@@ -21,6 +19,17 @@ public class UI_LevelsMenuController : MonoBehaviour, IDragHandler, IEndDragHand
     [Header("Variables")]
     [SerializeField]
     private float snapForce = 100;
+    [SerializeField]
+    private int countOfLevelsInOneHolder = 15;
+
+    [Space]
+    [Header("Prefabs")]
+    [SerializeField]
+    private Image dotPrefab;
+    [SerializeField]
+    private RectTransform levelHolderPrefab;
+    [SerializeField]
+    private UI_LevelButtonController levelButtonPrefab;
 
     [Space]
     [Header("Other")]
@@ -34,10 +43,15 @@ public class UI_LevelsMenuController : MonoBehaviour, IDragHandler, IEndDragHand
     private bool isDragNow = false;
     private float snapSpeed;
 
+    private List<RectTransform> levelsHolders = new List<RectTransform>();
+    private List<Image> dots = new List<Image>();
+
     private void Start()
     {
         content = levelsView.content;
         contentLayoutGroup = content.GetComponent<HorizontalLayoutGroup>();
+
+        RedrawLevels();
 
         var firstElement = levelsHolders.Where(x => x.gameObject.activeInHierarchy).FirstOrDefault();
 
@@ -101,6 +115,42 @@ public class UI_LevelsMenuController : MonoBehaviour, IDragHandler, IEndDragHand
     public void OnEndDrag(PointerEventData eventData)
     {
         isDragNow = false;
+    }
+
+    private void RedrawLevels()
+    {
+        foreach (var dot in dots)
+            Destroy(dot.gameObject);
+        foreach (var dot in dotsHolder.GetComponentsInChildren<Image>())
+            Destroy(dot.gameObject);
+        dots.Clear();
+
+        foreach (var holder in levelsHolders)
+            Destroy(holder.gameObject);
+        foreach (var holder in content.GetComponentsInChildren<RectTransform>())
+        {
+            if (holder != content.GetComponent<RectTransform>())
+                Destroy(holder.gameObject);
+        }
+        levelsHolders.Clear();
+
+        var levelsInfo = LevelsInfo.Get.Levels;
+
+        for (int i = 0; i < levelsInfo.Count; i++)
+        {
+            if (i == 0 || i + 1 % countOfLevelsInOneHolder == 0)
+            {
+                var newHolder = Instantiate(levelHolderPrefab, content);
+                levelsHolders.Add(newHolder);
+
+                var newDot = Instantiate(dotPrefab, dotsHolder);
+                dots.Add(newDot);
+            }
+
+            var currentHolder = levelsHolders.LastOrDefault();
+            var newLevelButton = Instantiate(levelButtonPrefab, currentHolder);
+            newLevelButton.Set(levelsInfo[i]);
+        }
     }
 
     private void OnReturnButtonClicked()

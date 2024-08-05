@@ -7,6 +7,8 @@ public class UI_PanelController : MonoBehaviour
     [SerializeField]
     private float openCloseAnimationSpeed = 0.2f;
 
+    public bool IsShowen => gameObject.activeInHierarchy;
+
     public virtual void Show()
     {
         transform.localScale = new Vector3(0, 0, 0);

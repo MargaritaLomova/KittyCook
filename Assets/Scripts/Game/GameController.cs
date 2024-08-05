@@ -16,17 +16,14 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private float guestLifetime = 15f;
 
-    [Space]
-    [Header("Prefabs")]
-    [SerializeField]
-    private List<GuestController> guestsPrefabs = new List<GuestController>();
-
     public static GameController Get { get; private set; }
     public event UnityAction<RecipeInfo> OnNewOrderCreate;
     public GuestController CurrentGuest { get; private set; }
     public RecipeInfo CurrentOrder => CurrentGuest.Order;
+    public LevelInfo CurrentInfo => currentInfo;
 
     private bool isGame = true;
+    private LevelInfo currentInfo;
     private Coroutine guestsCoroutine;
 
     private void Awake()
@@ -37,6 +34,11 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         guestsCoroutine = StartCoroutine(GuestsCoroutine());
+    }
+
+    public void SetCurrentLevelInfo(LevelInfo info)
+    {
+        currentInfo = info;
     }
 
     public void ClientGetCookedDish(RecipeInfo info)
@@ -57,8 +59,8 @@ public class GameController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
 
-            var randomIndex = Random.Range(0, guestsPrefabs.Count);
-            var randomGuestPrefab = guestsPrefabs[randomIndex];
+            var randomIndex = Random.Range(0, currentInfo.AvailableGuests.Length);
+            var randomGuestPrefab = currentInfo.AvailableGuests[randomIndex];
 
             CurrentGuest = Instantiate(randomGuestPrefab, guestsHolder);
             CurrentGuest.transform.SetAsFirstSibling();

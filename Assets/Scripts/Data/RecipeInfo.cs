@@ -11,6 +11,7 @@ namespace KittyCook.Data
         public Sprite Sprite;
         public List<ProductInfo> ProductsForCook = new List<ProductInfo>();
         public CookingMethod CookingMethod;
+        public int Cost;
     }
 
     public enum CookingMethod
