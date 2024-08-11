@@ -5,7 +5,7 @@ public class UI_PanelController : MonoBehaviour
 {
     [Header("Animation Variables")]
     [SerializeField]
-    private float openCloseAnimationSpeed = 0.2f;
+    protected float openCloseAnimationSpeed = 0.2f;
 
     public bool IsShowen => gameObject.activeInHierarchy;
 

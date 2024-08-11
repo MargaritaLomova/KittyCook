@@ -2,6 +2,7 @@ using KittyCook.Data;
 using KittyCook.Tech;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,6 +25,7 @@ public class GameController : MonoBehaviour
 
     private bool isGame = true;
     private LevelInfo currentInfo;
+    private TutorialInfo currentTutorialInfo;
     private Coroutine guestsCoroutine;
 
     private void Awake()
@@ -31,14 +33,26 @@ public class GameController : MonoBehaviour
         Get = this;
     }
 
-    private void Start()
+    private async void Start()
     {
+        await Task.Delay(10);
+
+        if (currentTutorialInfo != null)
+        {
+            UI_TutorialMenuController.Get.SetTutorialPreset(currentTutorialInfo);
+            UI_TutorialMenuController.Get.Show();
+        }
+
         guestsCoroutine = StartCoroutine(GuestsCoroutine());
     }
 
     public void SetCurrentLevelInfo(LevelInfo info)
     {
         currentInfo = info;
+
+        var tutorialsInfo = TutorialsInfo.Get;
+        var tutorials = tutorialsInfo.Tutorials;
+        currentTutorialInfo = tutorials.Find(x => x.LevelToShowIndex == currentInfo.Index);
     }
 
     public void ClientGetCookedDish(RecipeInfo info)
