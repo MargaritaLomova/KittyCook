@@ -32,7 +32,36 @@ public class TutorialInfo
 {
     public int LevelToShowIndex;
     public string SpeakerName;
-    public string[] Phrases;
+    public Phrase[] Phrases;
     public AnimatorController SpeakerAnimatorController;
     public Sprite StartSpeakerIcon;
+}
+
+[Serializable]
+public class Phrase
+{
+    public string PhraseText;
+    [SerializeField]
+    private string HighlightedObjectName;
+    public bool HasHighlight => !string.IsNullOrEmpty(HighlightedObjectName);
+
+    public Vector2 HighlightPosition
+    {
+        get
+        {
+            if (!string.IsNullOrEmpty(HighlightedObjectName))
+            {
+                var refObject = GameObject.Find(HighlightedObjectName);
+                return refObject.transform.position;
+            }
+            else
+            {
+                return Vector2.zero;
+            }
+        }
+        private set
+        {
+
+        }
+    }
 }

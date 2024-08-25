@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UI_LoadingController : UI_PanelController
 {
@@ -20,6 +21,8 @@ public class UI_LoadingController : UI_PanelController
     {
         Get = this;
 
+        DontDestroyOnLoad(transform.parent.gameObject);
+
         gameObject.SetActive(false);
     }
 
@@ -33,10 +36,13 @@ public class UI_LoadingController : UI_PanelController
 
     public override void Hide()
     {
-        base.Hide();
+        StartCoroutine(DelayActivate(() => ShowAnimationEnded, () =>
+        {
+            base.Hide();
 
-        StopCoroutine(rotateCoroutine);
-        StopCoroutine(changeTextCoroutine);
+            StopCoroutine(rotateCoroutine);
+            StopCoroutine(changeTextCoroutine);
+        }));
     }
 
     private IEnumerator RotateIcon()
@@ -45,7 +51,7 @@ public class UI_LoadingController : UI_PanelController
         while (IsShowen)
         {
             var angles = loadingIcon.transform.eulerAngles;
-            loadingIcon.transform.DORotate(new Vector3(angles.x, angles.y, angles.z - 180f), duration, RotateMode.Fast).SetLoops(-1, LoopType.Incremental);
+            loadingIcon.transform.DORotate(new Vector3(angles.x, angles.y, angles.z - 180f), duration, RotateMode.Fast).SetLoops(-1, LoopType.Incremental).SetUpdate(true);
 
             yield return new WaitForSecondsRealtime(duration + 0.2f);
         }
@@ -70,5 +76,13 @@ public class UI_LoadingController : UI_PanelController
 
             yield return new WaitForSecondsRealtime(duration);
         }
+    }
+
+    private IEnumerator DelayActivate(System.Func<bool> predicate, UnityAction callback)
+    {
+        yield return new WaitUntil(predicate);
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        callback?.Invoke();
     }
 }

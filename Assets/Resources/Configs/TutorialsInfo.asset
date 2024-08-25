@@ -16,8 +16,27 @@ MonoBehaviour:
   - LevelToShowIndex: 1
     SpeakerName: Chief
     Phrases:
-    - Hi!
-    - You are my new employer!
-    - Good luck!
+    - PhraseText: Congratulations on your first day of work, baby!
+      HighlightedObjectName: 
+    - PhraseText: Let me explain to you how to prepare and serve dishes!
+      HighlightedObjectName: 
+    - PhraseText: When the client comes to the restaurant, he will say what dish
+        he wants to order. Remember it!
+      HighlightedObjectName: GuestHolder
+    - PhraseText: After that, look in the refrigerator and take the necessary products!
+      HighlightedObjectName: ChooseProductPos
+    - PhraseText: As soon as you take the food, go to the stove and select the desired
+        cooking method.
+      HighlightedObjectName: CookPos
+    - PhraseText: When the dish is ready, give it to the client and get a reward!
+      HighlightedObjectName: ClientPos
+    - PhraseText: However, keep in mind that if you make a mistake in the preparation,
+        the client will be unhappy and will pay less!
+      HighlightedObjectName: 
+    - PhraseText: But don't worry! If you're not sure how to cook a dish, you can
+        always look at the "tips"!
+      HighlightedObjectName: HintButton
+    - PhraseText: Good luck!
+      HighlightedObjectName: 
     SpeakerAnimatorController: {fileID: 9100000, guid: d4c0a824973e4f248ba1a3c4620358ad, type: 2}
     StartSpeakerIcon: {fileID: 21300000, guid: 514406fc15aa7fb4494fbd9becf94268, type: 3}
