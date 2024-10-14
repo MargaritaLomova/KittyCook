@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Levels:
   - Index: 1
-    TimeOfDayInSeconds: 60
+    TimeOfDayInSeconds: 30
     AvailableGuests:
     - {fileID: 490175319073538655, guid: c9d73adf1fc480d4facdd05ede075ab7, type: 3}
     AvailableRecipes:
@@ -23,7 +23,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 3f060d8e98d17a24ba898467d75e41b8, type: 2}
     MaxGuestsCount: 2
   - Index: 2
-    TimeOfDayInSeconds: 60
+    TimeOfDayInSeconds: 30
     AvailableGuests:
     - {fileID: 490175319073538655, guid: 311d77bf67c34cc49a6b9165b7f43d4b, type: 3}
     AvailableRecipes:

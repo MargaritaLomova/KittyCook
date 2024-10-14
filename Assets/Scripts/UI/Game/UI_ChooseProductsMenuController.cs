@@ -83,5 +83,8 @@ public class UI_ChooseProductsMenuController : UI_PanelController
         {
             products[i].Init(productsToShow[i]);
         }
+
+        currentList.Clear();
+        player.PlayerInventory.Clear();
     }
 }

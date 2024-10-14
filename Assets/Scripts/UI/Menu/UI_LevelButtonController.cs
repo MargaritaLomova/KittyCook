@@ -45,7 +45,7 @@ public class UI_LevelButtonController : MonoBehaviour
             yield return new WaitForSecondsRealtime(Time.fixedDeltaTime);
             gameController = FindObjectOfType<GameController>();
         }
-        gameController.SetCurrentLevelInfo(currentInfo);
+        gameController.StartNewLevel(currentInfo);
 
         UI_LoadingController.Get.Hide();
 

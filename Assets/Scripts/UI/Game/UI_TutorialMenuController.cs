@@ -2,7 +2,6 @@ using DG.Tweening;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UI_TutorialMenuController : UI_PanelController
@@ -119,10 +118,10 @@ public class UI_TutorialMenuController : UI_PanelController
                 background.GetComponent<Image>().DOFade(0, openCloseAnimationSpeed).SetUpdate(true);
             }
 
-            StartCoroutine(DelayActivate(() => highlight.color.a == fullAlpha, () =>
+            KittyCook.Helpers.Timer.Instance.WaitUntil(() => highlight.color.a == fullAlpha, () =>
             {
                 highlight.transform.DOMove(currentInfo.Phrases[currentTutorialStep].HighlightPosition, openCloseAnimationSpeed).SetUpdate(true);
-            }));
+            });
         }
         else
         {
@@ -156,12 +155,5 @@ public class UI_TutorialMenuController : UI_PanelController
         }
 
         phrasePrintCoroutine = null;
-    }
-
-    private IEnumerator DelayActivate(System.Func<bool> predicate, UnityAction callback)
-    {
-        yield return new WaitUntil(predicate);
-
-        callback?.Invoke();
     }
 }
